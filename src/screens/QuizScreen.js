@@ -48,8 +48,8 @@ function QuizScreen({navigation}) {
   } else {
     return (
       <View style={styles.viewContainer}>
-        <FCText>{cards[cardIdx].question}</FCText>
-        <FCText>{showAnswer ? cards[cardIdx].answer : null}</FCText>
+        <FCText>Q: {cards[cardIdx].question}</FCText>
+        <FCText> {showAnswer ? 'A: ' + cards[cardIdx].answer : null}</FCText>
         <FCButton
           title="Show answer"
           onClick={() => {
