@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import {View} from 'react-native';
 import {styles} from './screen.style';
 import {FCText, FCButton} from '../components/UIWidget';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {UPDATE_QUIZ_STATUS} from '../store/reduxHelper';
 
 function QuizScreen({navigation}) {
   const currentDeck = useSelector(store => store.flashCards.currentDeck);
@@ -14,6 +16,17 @@ function QuizScreen({navigation}) {
   const {cards, name: deckTitle} = currentDeck;
   const cardCount = cards.length;
 
+  const dispatch = useDispatch();
+  const updateStatus = React.useCallback(status => {
+    dispatch(
+      {
+        type: UPDATE_QUIZ_STATUS,
+        payload: {isCompleted: status, updatedDate: new Date()},
+      },
+      [dispatch],
+    );
+  });
+
   if (!cardCount) {
     return (
       <FCText>
@@ -23,6 +36,7 @@ function QuizScreen({navigation}) {
     );
   } else if (cardCount <= cardIdx) {
     let finalScore = Math.round(100 / cardCount) * correct;
+    updateStatus(true);
     return (
       <View style={styles.viewContainer}>
         <FCText>Correct: {correct}</FCText>

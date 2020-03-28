@@ -1,4 +1,3 @@
-
 import {combineReducers} from 'redux';
 // import { PURGE } from 'redux-persist/es/constants';
 export const CREATE_DECK = '@@create_deck';
@@ -6,6 +5,9 @@ export const DELETE_DECK = '@@DELETE_DECK';
 export const CREATE_QUIZ = '@@create_quiz';
 export const ADD_CARD_TO_DECK = '@@add_card_to_deck';
 export const UPDATE_CURRENT_DECK = '@@update_current_deck';
+export const UPDATE_QUIZ_STATUS = '@@update_quiz_status';
+export const QUIZ_NOTIFY_STATUS = '@@quiz_notify_status';
+
 
 export function getKey() {
   return (
@@ -21,6 +23,7 @@ const initialState = {
   decks: [],
   decksData: {},
   currentDeck: {cards: []},
+  quizNotify: {isCompleted: false, updatedDate: new Date(), notified: false},
 };
 
 /** Ref: https://daveceddia.com/react-redux-immutability-guide/#redux-updating-an-object-by-key */
@@ -79,8 +82,13 @@ const appReducer = (state = initialState, action) => {
         ...state,
         currentDeck: {...deck},
       };
-    case CREATE_QUIZ:
-      return state;
+    case UPDATE_QUIZ_STATUS:
+      const {quizNotify} = state;
+      const {isCompleted, updatedDate} = action.payload;
+      return {
+        ...state,
+        quizNotify: {...quizNotify, isCompleted, updatedDate},
+      };
     default:
       return state;
   }
