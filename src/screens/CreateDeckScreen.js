@@ -14,7 +14,7 @@ function CreateDeckScreen({navigation, createDeck}) {
     <Container>
       <Content>
         <Form>
-          <Item last>
+          <Item>
             <Input
               placeholder="Deck title"
               onChangeText={text => onChangeText(text)}
@@ -22,6 +22,7 @@ function CreateDeckScreen({navigation, createDeck}) {
             />
           </Item>
           <Button
+            last
             style={{marginTop: 30}}
             block
             primary

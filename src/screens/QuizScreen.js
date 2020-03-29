@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 // import {View} from 'react-native';
@@ -5,7 +6,7 @@ import React from 'react';
 // import {Text, Button} from '../components/UIWidget';
 import {useSelector, useDispatch} from 'react-redux';
 import {UPDATE_QUIZ_STATUS} from '../store/reduxHelper';
-import {Container, Content, Text, Button} from 'native-base';
+import {Container, Content, Text, Button, H3} from 'native-base';
 
 function QuizScreen({navigation}) {
   const currentDeck = useSelector(store => store.flashCards.currentDeck);
@@ -40,12 +41,14 @@ function QuizScreen({navigation}) {
     updateStatus(true);
     return (
       <Container>
-        <Content>
+        <Content padder>
           <Text>Correct: {correct}</Text>
-          <Text>In Correct: {inCorrect}</Text>
-          <Text>Scored: {finalScore}%</Text>
+          <Text>InCorrect: {inCorrect}</Text>
+          <H3>Scored: {finalScore}%</H3>
           <Button
             block
+            info
+            style={{marginTop: 10}}
             onPress={() => {
               setCorrect(0);
               toggleAnswer(false);
@@ -56,6 +59,8 @@ function QuizScreen({navigation}) {
           </Button>
           <Button
             block
+            dark
+            style={{marginTop: 10}}
             onPress={() => {
               navigation.navigate('DECKINFO');
             }}>
@@ -67,20 +72,25 @@ function QuizScreen({navigation}) {
   } else {
     return (
       <Container>
-        <Content>
-          <Text>Q: {cards[cardIdx].question}</Text>
+        <Content padder>
+          <H3>Q: {cards[cardIdx].question}</H3>
           <Text> {showAnswer ? 'A: ' + cards[cardIdx].answer : null}</Text>
           <Button
             block
+            info
+            style={{marginTop: 10}}
             onPress={() => {
               toggleAnswer(true);
             }}>
-            <Text>Show answer</Text>
+            <Text>Show Answer</Text>
           </Button>
 
           <Button
+            success
             block
+            style={{marginTop: 10}}
             onPress={() => {
+              toggleAnswer(false);
               setCorrect(correct + 1);
               getCard(cardIdx + 1);
             }}>
@@ -88,7 +98,10 @@ function QuizScreen({navigation}) {
           </Button>
           <Button
             block
+            warning
+            style={{marginTop: 10}}
             onPress={() => {
+              toggleAnswer(false);
               setInCorrect(inCorrect + 1);
               getCard(cardIdx + 1);
             }}>

@@ -5,7 +5,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DELETE_DECK } from '../store/reduxHelper';
 
-import {Header, Container, Button, Text, Content, Left, Body, Title} from 'native-base';
+import {Container, Button, Text, Content, Left, Body, H3} from 'native-base';
 
 
 function DeckInfoScreen({ navigation }) {
@@ -23,29 +23,29 @@ function DeckInfoScreen({ navigation }) {
 
 	return (
 		<Container>
-			<Content>
-			<Body>
-              <Left>
+			<Content padder>
+			
+             
 
-                  <Title>{name}</Title>
+                  <H3>{name}</H3>
                   <Text note>{ count < 1 ? 'No Cards' : count + ' card'}</Text>
 
-              </Left>
+             
 
-			<Button style= {{marginTop: 10}} dark block onPress={() => navigation.navigate('ADDCARD')}>
+			<Button style= {{marginTop: 10}} primary block onPress={() => navigation.navigate('ADDCARD')}>
 				<Text>Add Card</Text>
 			</Button>
-			<Button style= {{marginTop: 10}} block onPress={() => navigation.navigate('STARTQUIZ')}>
+			<Button block style= {{marginTop: 10}} success onPress={() => navigation.navigate('STARTQUIZ')}>
 				<Text>Start Quiz</Text>
 			</Button>
 
-			<Button style= {{marginTop: 10}} block danger onPress={() => deleteDeck(okey)}>
+			<Button style= {{marginTop: 20}} block danger transparent onPress={() => deleteDeck(okey)}>
 				<Text>Delete Deck</Text>
 			</Button>
 
 				{/* <Text style={styles.titleHeader}>{name}</Text>
 				<Text></Text> */}
-</Body>
+
 			</Content>
 		</Container>
 	);

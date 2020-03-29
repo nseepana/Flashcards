@@ -14,7 +14,7 @@ function AddCardScreen({navigation, currentDeck, addCardToDeck}) {
   const [avalue, onAChangeText] = React.useState('');
   return (
     <Container>
-      <Content>
+      <Content padder>
         <Form>
           <Item>
             <Input
@@ -32,8 +32,10 @@ function AddCardScreen({navigation, currentDeck, addCardToDeck}) {
           </Item>
 
           <Button
+            block 
             last
             primary
+            style={{marginTop: 10}}
             onPress={() => {
               onQChangeText('');
               onAChangeText('');
