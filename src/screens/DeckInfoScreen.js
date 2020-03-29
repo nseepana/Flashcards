@@ -24,13 +24,13 @@ function DeckInfoScreen({ navigation }) {
 	return (
 		<Container>
 			<Content padder>
-			
-             
+
+
 
                   <H3>{name}</H3>
-                  <Text note>{ count < 1 ? 'No Cards' : count + ' card'}</Text>
+                  <Text note>{ count < 1 ? 'No Cards' : count + ' card(s)'}</Text>
 
-             
+
 
 			<Button style= {{marginTop: 10}} primary block onPress={() => navigation.navigate('ADDCARD')}>
 				<Text>Add Card</Text>

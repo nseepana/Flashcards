@@ -25,7 +25,7 @@ const HomeScreen = ({ decks = [], decksData = {}, updateCurrentDeck, navigation 
 								}}>
 								<Text style={styles.titleHeader}>{name}</Text>
 								<Text style={styles.getStartedText}>
-									{cardsCount < 1 ? 'No Cards' : cardsCount + ' card'}
+									{cardsCount < 1 ? 'No Cards' : cardsCount + ' card(s)'}
 								</Text>
 							</TouchableOpacity>
 						</View>
