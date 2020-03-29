@@ -1,52 +1,53 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, TextInput} from 'react-native';
+// import {View} from 'react-native';
 import {connect} from 'react-redux';
 
-import {styles} from './screen.style';
+// import {styles} from './screen.style';
 import {bindActionCreators} from 'redux';
 import {ADD_CARD_TO_DECK} from '../store/reduxHelper';
-import {FCButton} from '../components/UIWidget';
+// import {FCButton} from '../components/UIWidget';
+import {Container, Input, Content, Button, Form, Item, Text} from 'native-base';
 
 function AddCardScreen({navigation, currentDeck, addCardToDeck}) {
   const [qvalue, onQChangeText] = React.useState('');
   const [avalue, onAChangeText] = React.useState('');
   return (
-    <View
-      style={{
-        margin: 30,
-      }}>
-      <TextInput
-        placeholder="Question"
-        style={styles.inputBox}
-        onChangeText={text => onQChangeText(text)}
-        value={qvalue}
-      />
-      <TextInput
-        placeholder="Answer"
-        style={{
-          height: 40,
-          padding: 10,
-          borderColor: 'gray',
-          borderWidth: 1,
-          marginBottom: 30,
-        }}
-        onChangeText={text => onAChangeText(text)}
-        value={avalue}
-      />
-      <FCButton
-        title="Submit"
-        onClick={() => {
-          onQChangeText('');
-          onAChangeText('');
-          addCardToDeck({
-            okey: currentDeck.okey,
-            card: {question: qvalue, answer: avalue},
-          });
-          navigation.push('DECKINFO');
-        }}
-      />
-    </View>
+    <Container>
+      <Content>
+        <Form>
+          <Item>
+            <Input
+              placeholder="Question"
+              onChangeText={text => onQChangeText(text)}
+              value={qvalue}
+            />
+          </Item>
+          <Item>
+            <Input
+              placeholder="Answer"
+              onChangeText={text => onAChangeText(text)}
+              value={avalue}
+            />
+          </Item>
+
+          <Button
+            last
+            primary
+            onPress={() => {
+              onQChangeText('');
+              onAChangeText('');
+              addCardToDeck({
+                okey: currentDeck.okey,
+                card: {question: qvalue, answer: avalue},
+              });
+              navigation.push('DECKINFO');
+            }}>
+            <Text>Submit</Text>
+          </Button>
+        </Form>
+      </Content>
+    </Container>
   );
 }
 

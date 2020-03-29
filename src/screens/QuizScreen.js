@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import {View} from 'react-native';
-import {styles} from './screen.style';
-import {FCText, FCButton} from '../components/UIWidget';
+// import {View} from 'react-native';
+// import {styles} from './screen.style';
+// import {Text, Button} from '../components/UIWidget';
 import {useSelector, useDispatch} from 'react-redux';
 import {UPDATE_QUIZ_STATUS} from '../store/reduxHelper';
+import {Container, Content, Text, Button} from 'native-base';
 
 function QuizScreen({navigation}) {
   const currentDeck = useSelector(store => store.flashCards.currentDeck);
@@ -29,64 +30,72 @@ function QuizScreen({navigation}) {
 
   if (!cardCount) {
     return (
-      <FCText>
+      <Text>
         StartQuizScreen: Sorry, you cannot take the quiz because there are no
         cards in the deck
-      </FCText>
+      </Text>
     );
   } else if (cardCount <= cardIdx) {
     let finalScore = Math.round(100 / cardCount) * correct;
     updateStatus(true);
     return (
-      <View style={styles.viewContainer}>
-        <FCText>Correct: {correct}</FCText>
-        <FCText>In Correct: {inCorrect}</FCText>
-        <FCText>Scored: {finalScore}%</FCText>
-        <FCButton
-          title="Restart Quiz"
-          onClick={() => {
-            setCorrect(0);
-            toggleAnswer(false);
-            setInCorrect(0);
-            getCard(0);
-          }}
-        />
-        <FCButton
-          title={'Back to ' + deckTitle}
-          onClick={() => {
-            navigation.navigate('DECKINFO');
-          }}
-        />
-      </View>
+      <Container>
+        <Content>
+          <Text>Correct: {correct}</Text>
+          <Text>In Correct: {inCorrect}</Text>
+          <Text>Scored: {finalScore}%</Text>
+          <Button
+            block
+            onPress={() => {
+              setCorrect(0);
+              toggleAnswer(false);
+              setInCorrect(0);
+              getCard(0);
+            }}>
+            <Text>Restart Quiz</Text>
+          </Button>
+          <Button
+            block
+            onPress={() => {
+              navigation.navigate('DECKINFO');
+            }}>
+            <Text>{'Back to ' + deckTitle}</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   } else {
     return (
-      <View style={styles.viewContainer}>
-        <FCText>Q: {cards[cardIdx].question}</FCText>
-        <FCText> {showAnswer ? 'A: ' + cards[cardIdx].answer : null}</FCText>
-        <FCButton
-          title="Show answer"
-          onClick={() => {
-            toggleAnswer(true);
-          }}
-        />
-        <View>
-          <FCButton
-            title="Correct"
-            onClick={() => {
+      <Container>
+        <Content>
+          <Text>Q: {cards[cardIdx].question}</Text>
+          <Text> {showAnswer ? 'A: ' + cards[cardIdx].answer : null}</Text>
+          <Button
+            block
+            onPress={() => {
+              toggleAnswer(true);
+            }}>
+            <Text>Show answer</Text>
+          </Button>
+
+          <Button
+            block
+            onPress={() => {
               setCorrect(correct + 1);
               getCard(cardIdx + 1);
-            }}
-          />
-          <FCButton
-            title="Incorrect"
-            onClick={() => {
+            }}>
+            <Text>Correct</Text>
+          </Button>
+          <Button
+            block
+            onPress={() => {
               setInCorrect(inCorrect + 1);
               getCard(cardIdx + 1);
-            }}
-          />
-        </View>
-      </View>
+            }}>
+            <Text>Incorrect</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 }

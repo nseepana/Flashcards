@@ -1,11 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text } from 'react-native';
-import { styles } from './screen.style';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { FCText, FCButton } from '../components/UIWidget';
 import { DELETE_DECK } from '../store/reduxHelper';
 
+import {Header, Container, Button, Text, Content, Left, Body, Title} from 'native-base';
 
 
 function DeckInfoScreen({ navigation }) {
@@ -22,24 +22,32 @@ function DeckInfoScreen({ navigation }) {
 	const count = cards.length;
 
 	return (
-		<View style={styles.viewContainer}>
-			<View>
-				<Text style={styles.titleHeader}>{name}</Text>
-				<FCText>{ count < 1 ? 'No Cards' : count + ' card'}</FCText>
-			</View>
-			<FCButton
-				title="Add Card"
-				onClick={() => navigation.navigate('ADDCARD')}
-			/>
-			<FCButton
-				title="Start Quiz"
-				onClick={() => navigation.navigate('STARTQUIZ')}
-			/>
-			<FCButton
-				title="Delete Deck"
-				onClick={() => deleteDeck(okey)}
-			/>
-		</View>
+		<Container>
+			<Content>
+			<Body>
+              <Left>
+
+                  <Title>{name}</Title>
+                  <Text note>{ count < 1 ? 'No Cards' : count + ' card'}</Text>
+
+              </Left>
+
+			<Button style= {{marginTop: 10}} dark block onPress={() => navigation.navigate('ADDCARD')}>
+				<Text>Add Card</Text>
+			</Button>
+			<Button style= {{marginTop: 10}} block onPress={() => navigation.navigate('STARTQUIZ')}>
+				<Text>Start Quiz</Text>
+			</Button>
+
+			<Button style= {{marginTop: 10}} block danger onPress={() => deleteDeck(okey)}>
+				<Text>Delete Deck</Text>
+			</Button>
+
+				{/* <Text style={styles.titleHeader}>{name}</Text>
+				<Text></Text> */}
+</Body>
+			</Content>
+		</Container>
 	);
 }
 

@@ -1,6 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {Container, Button, Icon, Text} from 'native-base';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -48,7 +50,7 @@ export function AddDeckStackNavigator() {
 const DecksStack = createStackNavigator();
 
 export function DecksStackNavigator({navigation}) {
-/* Ref:https://reactnavigation.org/docs/bottom-tab-navigator/#tabpress*/
+  /* Ref:https://reactnavigation.org/docs/bottom-tab-navigator/#tabpress*/
   React.useEffect(() => {
     const unsubscribe = navigation.addListener('tabPress', e => {
       // Prevent default behavior
@@ -96,14 +98,26 @@ const AppNavigator = () => {
           name="HOME"
           component={DecksStackNavigator}
           options={{
-            title: 'Decks',
+            tabBarLabel: 'Decks',
+            tabBarIcon: ({color, size}) => {
+              return <Icon name="apps" style={{color}} fontSize={size} />;
+            },
           }}
         />
         <BottomTab.Screen
           name="ADDDECK"
           component={AddDeckStackNavigator}
           options={{
-            title: 'Add Deck',
+            tabBarLabel: 'Add Deck',
+            tabBarIcon: ({color, size}) => {
+              return (
+                <Icon
+                  name="add"
+                  style={{color: color, padding: 6}}
+                  fontSize={size}
+                />
+              );
+            },
           }}
         />
       </BottomTab.Navigator>
