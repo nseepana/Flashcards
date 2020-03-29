@@ -1,10 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
 // import {View} from 'react-native';
 import {Container, Input, Button, Text, Content, Form, Item} from 'native-base';
 
-import {styles} from './screen.style';
 import {CREATE_DECK, getKey} from '../store/reduxHelper';
 import {connect} from 'react-redux';
 
@@ -12,7 +10,7 @@ function CreateDeckScreen({navigation, createDeck}) {
   const [value, onChangeText] = React.useState('');
   return (
     <Container>
-      <Content>
+      <Content padder>
         <Form>
           <Item>
             <Input
