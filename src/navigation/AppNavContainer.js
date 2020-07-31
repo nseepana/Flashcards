@@ -1,19 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import AppNavigator from './AppNavigator';
+import AppNavigator from "./AppNavigator";
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from "react-native";
+import {Root} from "native-base";
 
 const AppNavContainer = () => (
-  <View style={styles.container}>
+  <Root style={styles.container}>
     <AppNavigator />
-  </View>
+  </Root>
 );
 export default AppNavContainer;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

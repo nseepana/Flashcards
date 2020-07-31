@@ -1,15 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React from "react";
 // import {View} from 'react-native';
 // import {styles} from './screen.style';
 // import {Text, Button} from '../components/UIWidget';
-import {useSelector, useDispatch} from 'react-redux';
-import {UPDATE_QUIZ_STATUS} from '../store/reduxHelper';
-import {Container, Content, Text, Button, H3} from 'native-base';
+import {useSelector, useDispatch} from "react-redux";
+import {UPDATE_QUIZ_STATUS} from "../store/reduxHelper";
+import {Container, Content, Text, Button, H3} from "native-base";
 
 function QuizScreen({navigation}) {
-  const currentDeck = useSelector(store => store.flashCards.currentDeck);
+  const currentDeck = useSelector((store) => store.flashCards.currentDeck);
 
   const [cardIdx, getCard] = React.useState(0);
   const [showAnswer, toggleAnswer] = React.useState(0);
@@ -19,23 +19,18 @@ function QuizScreen({navigation}) {
   const cardCount = cards.length;
 
   const dispatch = useDispatch();
-  const updateStatus = React.useCallback(status => {
+  const updateStatus = React.useCallback((status) => {
     dispatch(
       {
         type: UPDATE_QUIZ_STATUS,
         payload: {isCompleted: status, updatedDate: new Date()},
       },
-      [dispatch],
+      [dispatch]
     );
   });
 
   if (!cardCount) {
-    return (
-      <Text>
-        StartQuizScreen: Sorry, you cannot take the quiz because there are no
-        cards in the deck
-      </Text>
-    );
+    return <Text>StartQuizScreen: Sorry, you cannot take the quiz because there are no cards in the deck</Text>;
   } else if (cardCount <= cardIdx) {
     let finalScore = Math.round(100 / cardCount) * correct;
     updateStatus(true);
@@ -62,9 +57,9 @@ function QuizScreen({navigation}) {
             dark
             style={{marginTop: 10}}
             onPress={() => {
-              navigation.navigate('DECKINFO');
+              navigation.navigate("DECKINFO");
             }}>
-            <Text>{'Back to ' + deckTitle}</Text>
+            <Text>{"Back to " + deckTitle}</Text>
           </Button>
         </Content>
       </Container>
@@ -74,7 +69,7 @@ function QuizScreen({navigation}) {
       <Container>
         <Content padder>
           <H3>Q: {cards[cardIdx].question}</H3>
-          <Text> {showAnswer ? 'A: ' + cards[cardIdx].answer : null}</Text>
+          <Text> {showAnswer ? "A: " + cards[cardIdx].answer : null}</Text>
           <Button
             block
             info

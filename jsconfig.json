@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

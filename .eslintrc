@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "@react-native-community",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "quotes": "off",
+    "jsx-quotes": "off",
+    "curly": "error",
+    "no-case-declarations": "off"
+  }
+}
